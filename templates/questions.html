@@ -9,5 +9,6 @@
         {% for value in answers%}
         <p><input type="radio" name="{{value}}"></button><label>{{value}}</label></p>
     {% endfor %}
+        <p>{{session['answer_list']}}</p>
     </form>
 {%endblock%}

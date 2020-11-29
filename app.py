@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, flash, jsonify
+from flask import Flask, request, render_template, redirect, flash, jsonify, session
 from flask_debugtoolbar import DebugToolbarExtension
 import random
 from random import choice, sample
@@ -10,9 +10,9 @@ debug = DebugToolbarExtension(app)
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 answer_list = []
-
 @app.route('/home')
 def home():
+    session['answer_list'] = ''
     title = satisfaction_survey.title
     instructions = satisfaction_survey.instructions
     survey = satisfaction_survey
@@ -31,4 +31,5 @@ def answers():
         return redirect('/questions')
     else:
         answer_list.append(request.form)
+        session['answer_list'] = answer_list
         return redirect('/questions')
